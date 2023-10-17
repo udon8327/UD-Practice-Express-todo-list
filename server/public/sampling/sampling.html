@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width initial-scale=1 shrink-to-fit=no maximum-scale=1 user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' http://onlineerp.solution.quebec 'unsafe-inline' 'unsafe-eval';** ">
+    <meta property="og:image" content="http://static.naver.jp/line_lp/img/ogp.png">
+    <meta property="og:title" content="歐舒丹">
+    <meta property="og:description" content="歐舒丹">
+    <link href="img/favicon.ico" rel="shortcut icon">
+    <title>歐舒丹</title>
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/ud-modules.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+  </head>
+  <body>
+    <noscript>Your browser does not support JavaScript!</noscript>
+    <div id="app" v-cloak>
+      <div class="container" v-show="isInit">
+        <div class="wrapper">
+          <div class="gallery-area">
+            <div class="gallery" v-for="(gallery, index) in gallery.gallery_list" :id="`anchor-${gallery.seq}`" :key="gallery.seq"><a class="link" :href="action.content" v-for="action in gallery.actions" :style="{ top: action.area.y, left: action.area.x, width: action.area.width, height: action.area.height }"></a><img :src="gallery.image" alt="" @click.self="toAnchor(gallery.anchor)"></div>
+          </div>
+          <div class="info-area">
+            <div class="info-header"><a class="link" :href="action.content" v-for="action in info.header.actions" :style="{ top: action.area.y, left: action.area.x, width: action.area.width, height: action.area.height }"></a><img :src="info.header.image" alt=""></div>
+            <div class="info-form" :style="{ backgroundImage: 'url(' + info.body.image + ')' }">
+              <ud-form :rules="rules" :model="form" ref="form">
+                <!-- 固定欄位-->
+                <ud-form-item label="姓名" prop="name" flex v-if="info.form_list[0]">
+                  <ud-input v-model.trim="form.name" placeholder="請輸入姓名"></ud-input>
+                </ud-form-item>
+                <ud-form-item label="手機" prop="phone" flex v-if="info.form_list[1]">
+                  <ud-input v-model.trim="form.phone" type="tel" maxlength="10" placeholder="請輸入手機"></ud-input>
+                </ud-form-item>
+                <ud-form-item label="櫃點" flex v-if="info.form_list[2]">
+                  <ud-select-link v-model="form.store" :options="info.store_options" :placeholder="['縣市', '櫃點名稱', '日期', '時段']" third fourth></ud-select-link>
+                </ud-form-item>
+                <ud-form-item label="生日" flex v-if="info.form_list[3]">
+                  <ud-select-date v-model="form.birth" flex third></ud-select-date>
+                </ud-form-item>
+                <ud-form-item label="Email" prop="email" flex v-if="info.form_list[4]">
+                  <ud-input v-model.trim="form.email" placeholder="請輸入Email"></ud-input>
+                </ud-form-item>
+                <!-- 自定義欄位-->
+                <ud-form-item :label="item.label" flex v-for="item in info.form_custom_list" :key="item.name">
+                  <ud-textarea v-model.trim="form[item.name]" :placeholder="`請輸入${item.label}`" rows="4" v-if="item.type === 'textarea'"></ud-textarea>
+                  <ud-select v-model="form[item.name]" :options="item.options" placeholder="請選擇一項" v-if="item.type === 'select'"></ud-select>
+                </ud-form-item>
+              </ud-form>
+              <div class="button-wrapper">
+                <ud-button @click="submit">送出表單</ud-button>
+              </div>
+            </div>
+            <div class="info-footer"><a class="link" :href="action.content" v-for="action in info.footer.actions" :style="{ top: action.area.y, left: action.area.x, width: action.area.width, height: action.area.height }"></a><img :src="info.footer.image" alt=""></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.common.dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script>
+      if(!window.Vue){
+        document.write(`
+          <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"><\/script>
+          <script src="https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js"><\/script>
+        `);
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.3/JsBarcode.all.min.js"></script>
+    <script src="js/ud-modules.js"></script>
+    <script src="js/ud-axios.js"></script>
+    <script src="js/sampling.js"></script>
+  </body>
+</html>

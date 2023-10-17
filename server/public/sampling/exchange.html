@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width initial-scale=1 shrink-to-fit=no maximum-scale=1 user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta property="og:image" content="http://static.naver.jp/line_lp/img/ogp.png">
+    <meta property="og:title" content="歐舒丹">
+    <meta property="og:description" content="歐舒丹">
+    <link href="img/favicon.ico" rel="shortcut icon">
+    <title>歐舒丹</title>
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/ud-modules.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+  </head>
+  <body>
+    <noscript>Your browser does not support JavaScript!</noscript>
+    <div id="app" v-cloak>
+      <div class="container" v-show="isInit">
+        <div class="wrapper">
+          <div class="info-area">
+            <div class="info-header"><a class="link" :href="action.content" v-for="action in info.header.actions" :style="{ top: action.area.y, left: action.area.x, width: action.area.width, height: action.area.height }"></a><img :src="info.header.image" alt=""></div>
+            <div class="info-exchange"><a class="link" :href="action.content" v-for="action in info.exchange.actions" :style="{ top: action.area.y, left: action.area.x, width: action.area.width, height: action.area.height }"></a><img :src="info.exchange.image" alt="">
+              <div class="exchange-wrapper" :style="{ backgroundImage: 'url(' + info.body.image + ')' }">
+                <div class="barcode-area">
+                  <svg id="barcode"></svg>
+                </div>
+                <div class="input-area">
+                  <div class="input-left">
+                    <p>輸入兌換碼</p>
+                  </div>
+                  <div class="input-right">
+                    <ud-input v-model.trim="exchange_code"></ud-input>
+                  </div>
+                </div>
+                <div class="button-area">
+                  <ud-button @click="checkExchange">完成兌換</ud-button>
+                </div>
+              </div>
+            </div>
+            <div class="info-footer"><a class="link" :href="action.content" v-for="action in info.footer.actions" :style="{ top: action.area.y, left: action.area.x, width: action.area.width, height: action.area.height }"></a><img :src="info.footer.image" alt=""></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.common.dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script>
+      if(!window.Vue){
+        document.write(`
+          <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"><\/script>
+          <script src="https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js"><\/script>
+        `);
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.3/JsBarcode.all.min.js"></script>
+    <script src="js/ud-modules.js"></script>
+    <script src="js/ud-axios.js"></script>
+    <script src="js/exchange.js"></script>
+  </body>
+</html>

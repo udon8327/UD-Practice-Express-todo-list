@@ -1,0 +1,45 @@
+.link {
+  position: absolute; }
+
+.gallery-area .gallery {
+  position: relative; }
+
+.info-area .info-header, .info-area .info-footer, .info-area .info-result {
+  position: relative; }
+
+.info-area .info-form {
+  padding: 15px 12% 40px 12%;
+  background: url("") repeat-y top center;
+  background-size: 100%; }
+  .info-area .info-form .ud-form {
+    margin-bottom: 40px !important; }
+  .info-area .info-form .button-wrapper {
+    padding: 0 20%; }
+
+.info-area .info-exchange .exchange-wrapper {
+  padding: 0px 12% 40px 12%;
+  background: url("") repeat-y top center;
+  background-size: 100%;
+  text-align: center; }
+
+.info-area .info-exchange .barcode-area {
+  padding: 0 5%; }
+  .info-area .info-exchange .barcode-area #barcode {
+    width: 100%; }
+
+.info-area .info-exchange .input-area {
+  padding: 20px 5% 30px 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .info-area .info-exchange .input-area .input-left {
+    margin-right: 10px; }
+
+.info-area .info-exchange .button-area {
+  padding: 0 20%; }
