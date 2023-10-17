@@ -6,18 +6,18 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/home",
+    redirect: "/index",
   },
   {
-    path: "/home",
-    name: "home",
-    component: () => import("@/views/home/index.vue"),
+    path: "/index",
+    name: "index",
+    component: () => import("@/views/Index.vue"),
     meta: { requiresAuth: true },
   },
   {
     path: "/about",
     name: "about",
-    component: () => import("@/views/about/index.vue"),
+    component: () => import("@/views/About.vue"),
     meta: { requiresAuth: true },
   },
 

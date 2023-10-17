@@ -43,19 +43,8 @@ app.get('/', (req, res) => {
 app.get('/env', (req, res) => {
   res.send(process.env.ENV);
 })
-app.get('/db', (req, res) => {
-  res.send(isDBConnected ? 'DB連線成功' : error);
-})
 
 // 路由模組化
-app.use('/test', require('./routes/test'));
-app.use('/data', require('./routes/data'));
-app.use('/coolbe', require('./routes/coolbe'));
-app.use('/sprite', require('./routes/sprite'));
-app.use('/larocheposay', require('./routes/larocheposay'));
-app.use('/shiseido', require('./routes/shiseido'));
-app.use('/bobbibrown', require('./routes/bobbibrown'));
-app.use('/loccitane', require('./routes/loccitane'));
 app.use('/todo', require('./routes/todo'));
 
 // 404
