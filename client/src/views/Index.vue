@@ -25,8 +25,9 @@ export default {
         status: null,
       },
       statusOptions: [
-        { label: "未完成", value: "todo" },
+        { label: "全部", value: null },
         { label: "完成", value: "complete" },
+        { label: "未完成", value: "todo" },
       ],
       todoList: [],
     };
