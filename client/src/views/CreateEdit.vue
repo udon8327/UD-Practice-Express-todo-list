@@ -1,8 +1,10 @@
 <template lang="pug">
 #create-edit
+  .title-area
+    h6 {{ mode === "create" ? "新增" : "編輯" }}待辦事項
   .form-area
     ud-input(v-model="form.title" placeholder="請輸入標題")
-    ud-radio(v-model="form.status" :options="statusOptions" flex)
+    ud-radio(v-model="form.status" v-if="mode === 'edit'" :options="statusOptions" flex)
   .button-area
     ud-button(@click="toUrl('/')" plain) 取消
     ud-button(@click="submit") 儲存
@@ -17,7 +19,7 @@ export default {
       mode: "create",
       form: {
         title: "",
-        status: "",
+        status: "todo",
       },
       statusOptions: [
         { label: "完成", value: "complete" },
@@ -49,7 +51,7 @@ export default {
           });
       } else {
         this.udAxios
-          .post(`/todo/edit/${this.$route.params.id}`, this.form)
+          .put(`/todo/edit/${this.$route.params.id}`, this.form)
           .then((res) => {
             this.$router.push("/");
           });
@@ -63,6 +65,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.title-area
+  padding: 15px 10% 0 10%
+
 .form-area
   padding: 15px 10%
 

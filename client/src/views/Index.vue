@@ -1,5 +1,7 @@
 <template lang="pug">
-#home
+#index
+  .title-area
+    h6 待辦事項
   .button-area
     ud-button(@click="createTodo" type="primary") 新增
   .todo-area
@@ -9,15 +11,17 @@
       ud-button(@click="editTodo(todo._id)" type="primary") 編輯
       ud-button(@click="deleteTodo(todo._id)" type="primary") 刪除
   .search-area
-    ud-input(v-model="search.title" placeholder="請輸入標題")
+    h6 搜尋
+    ud-input.mb-2(v-model="search.title" placeholder="請輸入標題")
     ud-radio(v-model="search.status" :options="statusOptions" flex)
   .button-area
+    ud-button(@click="resetSearch" type="primary" plain) 重置
     ud-button(@click="getTodoList" type="primary") 查詢
 </template>
 
 <script>
 export default {
-  name: "Home",
+  name: "Index",
   components: {},
   data() {
     return {
@@ -46,6 +50,13 @@ export default {
           this.todoList = res.data;
         });
     },
+    resetSearch() {
+      this.search = {
+        title: null,
+        status: null,
+      };
+      this.getTodoList();
+    },
     createTodo() {
       this.$router.push(`/create`);
     },
@@ -67,6 +78,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.title-area
+  padding: 15px 10% 0 10%
+
 .todo-area
   padding: 15px 10%
   .todo
@@ -83,10 +97,12 @@ export default {
 .button-area
   padding: 15px 10%
   display: flex
-  justify-content: flex-end
+  justify-content: space-between
   .ud-button
     flex: 0 0 48%
 
 .search-area
   padding: 0 10%
+  h6
+    margin-bottom: 15px
 </style>

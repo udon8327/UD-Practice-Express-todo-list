@@ -23,6 +23,11 @@ const UserSchema = new mongoose.Schema(
 const UserModel = mongoose.model('user', UserSchema);
 
 router.get('/', async (req, res) => {
+  console.log('req.query: ', req.query);
+  for(query in req.query) {
+    if (!req.query[query]) delete req.query[query];
+  };
+  console.log('req.query: ', req.query);
   const data = await UserModel.find(req.query);
   res.send({
     code: "200",
