@@ -11,7 +11,9 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
+  mounted() {
+    console.log(process.env.NODE_ENV);
+  },
   methods: {},
 };
 </script>

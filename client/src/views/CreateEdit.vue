@@ -34,8 +34,7 @@ export default {
   methods: {
     getEditTodo() {
       this.udAxios
-        .get(`http://localhost:9100/todo/edit/${this.$route.params.id}`)
-        // .get(`https://mock.udons.site/todo/edit/${this.$route.params.id}`)
+        .get(`/todo/edit/${this.$route.params.id}`)
         .then((res) => {
           this.form.title = res.data.title;
           this.form.status = res.data.status;
@@ -44,15 +43,13 @@ export default {
     submit() {
       if (this.mode === "create") {
         this.udAxios
-          .post(`http://localhost:9100/todo/create`, this.form)
-          // .post(`https://mock.udons.site/todo/edit`, this.form)
+          .post(`/todo/create`, this.form)
           .then((res) => {
             this.$router.push("/");
           });
       } else {
         this.udAxios
-          .post(`http://localhost:9100/todo/edit/${this.$route.params.id}`, this.form)
-          // .post(`https://mock.udons.site/todo/edit/${this.$route.params.id}`, this.form)
+          .post(`/todo/edit/${this.$route.params.id}`, this.form)
           .then((res) => {
             this.$router.push("/");
           });

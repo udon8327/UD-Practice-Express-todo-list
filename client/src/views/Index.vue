@@ -39,8 +39,7 @@ export default {
   methods: {
     getTodoList() {
       this.udAxios
-        .get(`http://localhost:9100/todo`, {
-        // .get(`https://mock.udons.site/todo/`), {
+        .get(`/todo`, {
           params: this.search,
         })
         .then((res) => {
@@ -55,8 +54,7 @@ export default {
     },
     deleteTodo(id) {
       this.udAxios
-        .delete(`http://localhost:9100/todo/delete/${id}`)
-        // .delete(`https://mock.udons.site/todo/delete/${id}`)
+        .delete(`/todo/delete/${id}`)
         .then((res) => {
           this.getTodoList();
         });
