@@ -1,17 +1,18 @@
 <template lang="pug">
 #home
+  .button-area
+    ud-button(@click="createTodo" type="primary") 新增
   .todo-area
     .todo(v-for="todo in todoList" :key="todo.id")
       p.title {{ todo.title }}
       p.status(:class="{ red: todo.status === 'todo' }") {{ todo.status === "todo" ? "未完成" : "完成" }}
-  .button-area
-    ud-button(@click="getTodoList" type="primary") 查詢
-    ud-button(@click="createTodo" type="primary") 新增
-    ud-button(@click="editTodo" type="primary") 編輯
-    ud-button(@click="deleteTodo" type="primary") 刪除
+      ud-button(@click="editTodo(todo._id)" type="primary") 編輯
+      ud-button(@click="deleteTodo(todo._id)" type="primary") 刪除
   .search-area
     ud-input(v-model="search.title" placeholder="請輸入標題")
     ud-radio(v-model="search.status" :options="statusOptions" flex)
+  .button-area
+    ud-button(@click="getTodoList" type="primary") 查詢
 </template>
 
 <script>
@@ -38,57 +39,26 @@ export default {
   methods: {
     getTodoList() {
       this.udAxios
-        // .get("https://mock.udons.site/todo/")
-        .get("http://localhost:9100/todo", {
+        .get(`http://localhost:9100/todo`, {
+        // .get(`https://mock.udons.site/todo/`), {
           params: this.search,
         })
         .then((res) => {
           this.todoList = res.data;
-          this.$message({
-            type: "success",
-            message: "取得成功",
-          });
         });
     },
     createTodo() {
-      this.udAxios
-        .post("http://localhost:9100/todo/create",{
-        // .post("https://mock.udons.site/todo/create",{
-          title: "爬山",
-          status: "todo",
-        })
-        .then((res) => {
-          this.$message({
-            type: "success",
-            message: "新增成功",
-          });
-        });
+      this.$router.push(`/create`);
     },
-    editTodo() {
-      this.udAxios
-        // .post("http://localhost:9100/cats/edit/1",{
-        .post("https://mock.udons.site/todo/edit/1",{
-          user_name: "nekomimi",
-          password: "cat1234",
-        })
-        .then((res) => {
-          console.log("res: ", res);
-          this.$message({
-            type: "success",
-            message: "編輯成功",
-          });
-        });
+    editTodo(id) {
+      this.$router.push(`/edit/${id}`);
     },
-    deleteTodo() {
+    deleteTodo(id) {
       this.udAxios
-        // .delete("http://localhost:9100/cats/delete/1", {
-        .delete("https://mock.udons.site/todo/delete/1")
+        .delete(`http://localhost:9100/todo/delete/${id}`)
+        // .delete(`https://mock.udons.site/todo/delete/${id}`)
         .then((res) => {
-          console.log('res: ', res);
-          this.$message({
-            type: "success",
-            message: "刪除成功",
-          });
+          this.getTodoList();
         });
     },
     toUrl(url) {
@@ -113,12 +83,11 @@ export default {
           color: red
 
 .button-area
-  padding: 0 10%
+  padding: 15px 10%
   display: flex
-  justify-content: space-between
-  margin-bottom: 15px
+  justify-content: flex-end
   .ud-button
-    flex: 0 0 24%
+    flex: 0 0 48%
 
 .search-area
   padding: 0 10%

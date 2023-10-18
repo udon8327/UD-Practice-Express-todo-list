@@ -50,6 +50,15 @@ router.post('/create', async (req, res) => {
   });
 });
 
+router.get('/edit/:id', async (req, res) => {
+  const data = await UserModel.findById(req.params.id);
+  res.send({
+    code: "200",
+    data: data,
+    message: "取得成功"
+  });
+});
+
 router.put('/edit/:id', async (req, res) => {
   req.body.update_at = Math.floor(Date.now() / 1000);
   const data = await UserModel.findByIdAndUpdate(req.params.id, req.body, {

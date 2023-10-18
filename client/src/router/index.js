@@ -12,13 +12,16 @@ const routes = [
     path: "/index",
     name: "index",
     component: () => import("@/views/Index.vue"),
-    meta: { requiresAuth: true },
   },
   {
-    path: "/about",
-    name: "about",
-    component: () => import("@/views/About.vue"),
-    meta: { requiresAuth: true },
+    path: "/create",
+    name: "create",
+    component: () => import("@/views/CreateEdit.vue"),
+  },
+  {
+    path: "/edit/:id",
+    name: "edit",
+    component: () => import("@/views/CreateEdit.vue"),
   },
 
   // 錯誤頁
